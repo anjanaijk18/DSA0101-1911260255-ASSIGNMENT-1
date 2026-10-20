@@ -1,0 +1,59 @@
+TASK 1 – Understand the Problem and Identify the Objects
+1. Objective
+The objective is to analyse the Namma Metro Smart-Card Fare System using Object-Oriented Programming (OOP). The system calculates the fare according to the zone travelled, applies a peak-hour surcharge, and checks whether the smart card has sufficient balance after the fare deduction.
+2. Identification of Objects
+a) SmartCard
+Card number and current balance in paise.
+Checks whether a journey is allowed, deducts the fare, and maintains the minimum balance.
+ The SmartCard object keeps the balance safe and prevents unauthorised changes. The balance must not fall below Rs. 50 after a journey.
+b) Passenger
+Passenger ID, passenger category, and concession eligibility.
+ Identifies whether the passenger is a student, senior citizen, or regular passenger.
+This object helps apply the correct concession according to the passenger category.
+c) Journey
+Source zone, destination zone, travel time, and calculated fare.
+Determines the farthest zone travelled and calculates the applicable fare.
+Each journey has separate details and fare rules, so representing it as an object makes the program easier to maintain.
+d) Zone
+Zone name and corresponding base fare.
+Identifies the zone used for fare calculation.
+The system has three zones: Inner (Rs. 10), Middle (Rs. 20), and Outer (Rs. 30). Using an enumeration for zones avoids confusing zone names with unrelated integer values.
+e) FareTable
+Base fares, peak surcharge percentage, and minimum balance.
+Provides the correct fare and applies the peak-hour surcharge.
+Keeping fare values in one place avoids repeating them throughout the program and makes future fare revisions easier.
+3. Procedural Programming vs Object-Oriented Programming
+
+In procedural programming, the system would use separate variables and functions to store card balances, calculate fares, apply concessions, and deduct money. If the fare rules changed, several functions might need modification.
+In Object-Oriented Programming, the system is divided into classes such as SmartCard, Passenger, Journey, and FareTable. Each class manages its own data and behaviour. This improves code organisation, reusability, security, and maintainability.
+Therefore, OOP is more suitable for a metro fare system that may grow and introduce new zones, discounts, and monthly passes.
+
+4. Basic Principles of OOP
+a) Encapsulation
+Encapsulation combines data and functions in a class. The SmartCard class keeps its balance private and provides controlled functions such as `canTravel()` and `deduct()`.
+b) Abstraction
+Abstraction hides internal calculations and exposes only necessary operations. For example, the passenger or gate system can request the fare without needing to know every internal calculation.
+c) Inheritance
+Inheritance allows specialised passenger classes, such as Student and SeniorCitizen, to inherit common properties from a Passenger base class.
+d) Polymorphism
+Polymorphism allows different passenger categories to calculate concessions using a common interface, such as a virtual `getConcession()` function.
+Inheritance and polymorphism are useful design options, although they are not necessary for a small initial version of the system.
+
+5. Rules for a Correct Journey
+1. The zone must be valid.
+2. The base fare must match the farthest zone travelled.
+3. Peak-hour surcharge applies from 8:00 AM to before 10:00 AM and from 5:00 PM to before 8:00 PM.
+4. Exactly 10:00 AM and exactly 8:00 PM are treated as off-peak.
+5. Money must be stored in integer paise to avoid floating-point rounding errors.
+6. The smart card must have enough money to pay the fare and retain at least Rs. 50 afterwards.
+7. A fare must not be deducted if the journey is denied.
+8. Student and senior-citizen concessions must be applied according to the defined concession rules.
+9. The card balance must never become negative or fall below the required minimum after an accepted journey.
+Assumption:The assignment does not specify the exact student and senior-citizen concession percentages. These values must be defined before implementing the concession calculation.
+6. Alternative Concept and Complexity Analysis
+If the system used procedural programming, the balance could be stored in a variable and managed using functions such as `calculateFare()`, `isPeakHour()`, and `canTravel()`. The fare values could be stored in global constants.
+Both procedural and object-oriented solutions require **O(1) time per journey** when each journey uses a fixed number of calculations. The memory required for one card balance is also **O(1)** in both approaches.
+However, when a fare rule changes, the procedural solution may require modifications in several functions. In the object-oriented solution, the change can usually be made in the FareTable or fare-calculation class without modifying unrelated classes.
+The OOP solution also protects the card balance through encapsulation, reducing the risk of invalid balance updates.
+7. Conclusion
+The Object-Oriented Programming approach is recommended for the Namma Metro Smart-Card Fare System because it separates responsibilities, protects card balances, reduces repeated code, and supports future extensions. The design can be expanded to include a fourth zone, weekend discounts, and monthly passes with suitable modifications to the fare and passenger-related classes.
